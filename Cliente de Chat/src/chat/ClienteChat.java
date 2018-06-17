@@ -12,13 +12,13 @@ public class ClienteChat {
 	static Scanner input = new Scanner(System.in);
 
 	public static void main(String[] args) throws Exception {
+		try {
 		//1. Conectar com o Servidor no IP 127.0.0.1 e porta 8879
 		Socket servidor = new Socket("127.0.0.1", 8879);
 		//Criar os canais (streams) de entrada e saída
 		BufferedReader entrada = new BufferedReader(
 				new InputStreamReader(servidor.getInputStream()));
 		DataOutputStream saida = new DataOutputStream(servidor.getOutputStream());
-	
 		//2. Ler uma mensagem
 		new Thread() {
 			public void run()  {
@@ -46,6 +46,7 @@ public class ClienteChat {
 				}
 			}
 		}.start();
+		} catch(IOException e) { e.printStackTrace(); }
 	}
 }
 
