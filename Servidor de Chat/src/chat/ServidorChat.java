@@ -1,17 +1,22 @@
 package chat;
 
 import java.net.*;
-import java.util.Scanner;
 import java.io.*;
+import java.util.Scanner;
+import java.lang.String;
 
 public class ServidorChat {
 
 	static String mensagem;
+	static String mensagemE;
+	static String mensagemR;
+	static String mensagemRi;
 	String resposta;
-	Cipher2 c2;
+	;
 	static int n1, n2, n3, n4;
 
 	static Scanner input = new Scanner(System.in);
+	static  Cipher2 c2 = new Cipher2(); 
 
 	public static void main(String[] args) throws Exception {
 
@@ -23,31 +28,20 @@ public class ServidorChat {
 		BufferedReader entrada = new BufferedReader(
 				new InputStreamReader(cliente.getInputStream()));
 		DataOutputStream saida = new DataOutputStream(cliente.getOutputStream());
-
-		//Criar um Scanner para digitar mensagem de resposta no servidor
-		Cipher2 c2 = new Cipher2(); // modifiquei isto p ver se funciona
-		System.out.println("Digite um numero");
-		n1 = input.nextInt();
-		System.out.println("Digite um numero");
-		n2 = input.nextInt();
-		System.out.println("Digite um numero");
-		n3 = input.nextInt();
-		System.out.println("Digite um numero");
-		n4 = input.nextInt();
-		//		c2.initParameters(n1, n2, n3, n4, true);
+		c2.initParameters();
 
 		new Thread() {
 			public void run()  {
 				while (true) {
 					//4. Recebendo uma mensagem (String) do cliente
 					try {
-						//						System.out.println("Escreva mensagem: \n");
-						mensagem = entrada.readLine().toString();
-						c2.initParameters(n1, n2, n3, n4);
-						c2.decrypt(mensagem).toString();
-						//TODO decriptacao aqui / tentar getter setter DESCOBRIR PQ N RETORNA NADA
-						mensagem = c2.getTexto().toString(); // modifiquei isto p ver se funciona 
-						System.out.println(cliente.getInetAddress() + ">> " + mensagem + "\n");
+						//System.out.println("Escreva mensagem: \n");
+						mensagemR = entrada.readLine();
+						//TODO decriptacao aqui
+						c2.decrypt(mensagemR); // testar sem, ver se isto esta quebrando
+						mensagemRi = c2.getTexto(); // modifiquei isto p ver se funciona 
+						System.out.println("MENSAGEM PURA\n|>>| " + mensagemR + " |<<|");
+						System.out.println("\n" + cliente.getInetAddress() + ">> " + mensagemRi + "\nRESP. AQUI\n>>");
 					} catch (Exception e) {  }
 				}
 			}
@@ -61,14 +55,14 @@ public class ServidorChat {
 						System.out.print("Eu Server \n>> ");
 						//TODO encriptacao aqui
 						//resposta = input.nextLine();
-						//mensagem = input.nextLine(); // p o input do cliente
+//						mensagem = input.nextLine(); // p o input do cliente
 						if ((mensagem = input.nextLine()) != null) { // teste de mensagem vazia
-							c2.initParameters(n1, n2, n3, n4);
 							c2.encrypt(mensagem);
+							System.out.println("Esta é a mensagem que não foi:\n|=>| " + mensagem + " |<=| \n");
 						}
-						mensagem = c2.getTexto(); 
+						mensagemE = c2.getTexto(); 
 						//saida.write((resposta + "\n").getBytes());
-						saida.write((mensagem + "\n").getBytes());
+						saida.write((mensagemE + "\n").getBytes());
 					} catch (Exception e) {}
 				}
 			}

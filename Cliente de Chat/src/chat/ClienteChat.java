@@ -3,6 +3,8 @@ package chat;
 import java.net.*;
 import java.io.*;
 import java.util.Scanner;
+import java.lang.String;
+
 
 public class ClienteChat {
 	
@@ -19,13 +21,14 @@ public class ClienteChat {
 		BufferedReader entrada = new BufferedReader(
 				new InputStreamReader(servidor.getInputStream()));
 		DataOutputStream saida = new DataOutputStream(servidor.getOutputStream());
+		
 		//2. Ler uma mensagem
 		new Thread() {
 			public void run()  {
 				while (true) {
 				//4. Recebendo uma mensagem (String) do servidor
 					try {
-						mensagem = entrada.readLine().toString();
+						mensagem = entrada.readLine();
 						//TODO decriptacao aqui
 						System.out.println(servidor.getInetAddress() + ">> " + mensagem + "\n");
 					} catch (Exception e) {}
