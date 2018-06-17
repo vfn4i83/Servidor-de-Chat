@@ -28,7 +28,7 @@ public class Cipher2 {
 		texto = mensagem;
 	}
 
-	public void initParameters(int n1,int n2,int n3,int n4) { 
+	public void initParameters() { 
 		//	public void initParameters(int n1,int n2,int n3,int n4, boolean ok) { 
 
 //				do { 	// Codigo nao recebe mensagens vazias.
@@ -48,19 +48,14 @@ public class Cipher2 {
 			ok = false;
 			System.out.println("2 laco");
 			
-			this.n1 = n1;
-			this.n2 = n2;
-			this.n3 = n3;
-			this.n4 = n4;
-			
-//			System.out.println("Digite 1º Nº ");
-//			n1 = input.nextInt();
-//			System.out.println("Digite 2º Nº ");
-//			n2 = input.nextInt();
-//			System.out.println("Digite 3º Nº ");
-//			n3 = input.nextInt();
-//			System.out.println("Digite 4º Nº ");
-//			n4 = input.nextInt();
+			System.out.println("Digite 1º Nº ");
+			n1 = input.nextInt();
+			System.out.println("Digite 2º Nº ");
+			n2 = input.nextInt();
+			System.out.println("Digite 3º Nº ");
+			n3 = input.nextInt();
+			System.out.println("Digite 4º Nº ");
+			n4 = input.nextInt();
 
 
 			// matriz inversa.
@@ -101,7 +96,7 @@ public class Cipher2 {
 	}
 
 	public String encrypt(String texto) {
-
+		
 		// rotina para cifrar.
 
 		char[] arrayChar = texto.toCharArray();
