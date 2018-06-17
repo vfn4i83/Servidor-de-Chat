@@ -19,46 +19,58 @@ public class Cipher2 {
 	int in4 = 0;
 	int determinante;
 	double resto;
+	boolean ok;
 	static String texto;
-	boolean ok = false;
+	int cout;
 	Scanner input = new Scanner(System.in);
-	
+
 	public static void setTexto(String mensagem) {
 		texto = mensagem;
 	}
-	
-	public void initParameters(int n1,int n2,int n3,int n4, boolean ok) { 
-//	public void initParameters(int n1,int n2,int n3,int n4, boolean ok) { 
-		
-//		do { // Codigo nao recebe mensagens vazias.
-//			ok = false;
-//			System.out.println("Entre com texto a ser sifrado");
-////			texto = input.nextLine(); //Substituir metodo Scan pelo texto recuperado do main server, possivel get setter
-////			O metodo setTexto já deve ter entrado c a string de texto neste momento.
-//			if (texto.equals("")) {
-//				System.out.println("Texto inválido !");
-//				ok = true;
-//			}
-//		} while (ok);
-		try {
-//		do {
-//			Inserido no Main da chamada e recebido pelo construtor
+
+	public void initParameters(int n1,int n2,int n3,int n4) { 
+		//	public void initParameters(int n1,int n2,int n3,int n4, boolean ok) { 
+
+//				do { 	// Codigo nao recebe mensagens vazias.
+//					ok = false;
+//					System.out.println("1 laco");
+////					System.out.println("Entre com texto a ser sifrado");
+////					texto = input.nextLine(); //Substituir metodo Scan pelo texto recuperado do main server, possivel get setter
+////					O metodo setTexto já deve ter entrado c a string de texto neste momento.
+//					if (texto.equals("")) {
+//						System.out.println("Texto inválido !");
+//						ok = true;
+//					}
+//				} while (ok);
+		//		try {
+		do {
+			//			Inserido no Main da chamada e recebido pelo construtor
 			ok = false;
-			System.out.println("Digite 1º Nº ");
-			n1 = input.nextInt();
-			System.out.println("Digite 2º Nº ");
-			n2 = input.nextInt();
-			System.out.println("Digite 3º Nº ");
-			n3 = input.nextInt();
-			System.out.println("Digite 4º Nº ");
-			n4 = input.nextInt();
+			System.out.println("2 laco");
+			
+			this.n1 = n1;
+			this.n2 = n2;
+			this.n3 = n3;
+			this.n4 = n4;
+			
+//			System.out.println("Digite 1º Nº ");
+//			n1 = input.nextInt();
+//			System.out.println("Digite 2º Nº ");
+//			n2 = input.nextInt();
+//			System.out.println("Digite 3º Nº ");
+//			n3 = input.nextInt();
+//			System.out.println("Digite 4º Nº ");
+//			n4 = input.nextInt();
+
 
 			// matriz inversa.
 			in1 = n4;
 			in4 = n1;
 			in2 = n2 * (-1);
 			in3 = n3 * (-1);
-
+			
+		System.out.println("realizando o teste matriz");
+		
 			determinante = ((n1 * n4) - (n3 * n2));
 			if (determinante != 0) {
 				resto = determinante % 2;
@@ -81,10 +93,11 @@ public class Cipher2 {
 					System.out.println("Matriz inválida nr. primos. ");
 					ok = true;
 				} 
-			} 
-		}catch (Exception e) { System.out.println("Erro Matriz\ntente denovo"); }
-		
-//		} while (ok); 
+				
+				cout++;
+				System.out.println( cout );
+			}} while(ok);
+		//} catch (Exception e) { }
 	}
 
 	public String encrypt(String texto) {
@@ -254,7 +267,7 @@ public class Cipher2 {
 	public String getInputText() {
 		return texto;		
 	}
-	
+
 	public String arrayToString(List<Character> arrayChar) {
 		StringBuilder sb = new StringBuilder();
 
@@ -432,9 +445,9 @@ public class Cipher2 {
 
 	}
 
-	
+
 	public String getTexto() {
 		return texto;
 	}
-	
+
 }
